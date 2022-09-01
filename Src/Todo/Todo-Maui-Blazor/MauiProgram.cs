@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components.WebView.Maui;
+using MudBlazor.Services;
 using Todo_Maui_Blazor.Data;
 
 namespace Todo_Maui_Blazor
@@ -16,8 +17,10 @@ namespace Todo_Maui_Blazor
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddMudServices();
+
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Services.AddBlazorWebViewDeveloperTools();
 #endif
 
             builder.Services.AddSingleton<WeatherForecastService>();
