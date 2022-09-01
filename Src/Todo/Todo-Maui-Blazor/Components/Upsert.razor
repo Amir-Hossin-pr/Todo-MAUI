@@ -1,4 +1,6 @@
-﻿<MudDialog>
+﻿
+
+<MudDialog>
     <DialogContent>
         <MudTextField T="string" Label="عنوان" @bind-Value="Title" Variant="@Variant.Outlined" />
         <MudTextField T="string" Label="متن" Lines="4" @bind-Value="Text" Variant="@Variant.Outlined" />
@@ -16,9 +18,11 @@
 
     [Parameter] public string Text { get; set; }
 
-    void Submit()
-    {
+    [Parameter] public int Id { get; set; }
 
+    async void Submit()
+    {
+       
     }
 
     void Cancel() => MudDialog.Cancel();
