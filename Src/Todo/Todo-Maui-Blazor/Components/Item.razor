@@ -1,0 +1,24 @@
+﻿
+<MudCard>
+    <MudCardContent>
+        <MudText>@Title</MudText>
+        <MudText Typo="Typo.body2">@Text</MudText>
+    </MudCardContent>
+    <MudCardActions>
+        @*<MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>*@
+        <MudButton Variant="Variant.Filled" Color="Color.Error" IconClass="@Icons.Material.Filled.Delete">حذف</MudButton>
+    </MudCardActions>
+</MudCard>
+
+@code {
+    [Parameter] public string Title { get; set; }
+
+    [Parameter] public string Text { get; set; }
+
+    [Parameter] public int Id { get; set; }
+
+    void DeleteItem()
+    {
+
+    }
+}

@@ -1,0 +1,25 @@
+﻿<MudDialog>
+    <DialogContent>
+        <MudTextField T="string" Label="عنوان" @bind-Value="Title" Variant="@Variant.Outlined" />
+        <MudTextField T="string" Label="متن" Lines="4" @bind-Value="Text" Variant="@Variant.Outlined" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Class="rounded-lg" Color="Color.Error" OnClick="Cancel" Variant="@Variant.Filled" FullWidth="true" Size="Size.Large">لفو</MudButton>
+        <MudButton Class="rounded-lg" Color="Color.Primary" OnClick="Submit" Variant="@Variant.Filled" FullWidth="true" Size="Size.Large">ذخیره</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter] public string Title { get; set; }
+
+    [Parameter] public string Text { get; set; }
+
+    void Submit()
+    {
+
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}
