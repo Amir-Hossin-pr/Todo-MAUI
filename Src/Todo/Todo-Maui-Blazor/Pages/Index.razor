@@ -1,7 +1,18 @@
 ﻿@page "/"
+@using Todo_Maui_Blazor.Components
+@inject IDialogService DialogService
 
-<h1>Hello, world!</h1>
+<div Class="mud-theme-info px-3 py-6 mud-elevation-16 rounded-lg fixed text-center" style="bottom:25px;left:20px" @onclick="NewItem">
+    <MudText>
+        افزودن مورد جدید
+    </MudText>
+</div>
 
-Welcome to your new app.
+@code {
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    void NewItem()
+    {
+        DialogOptions options = new() { CloseOnEscapeKey = false,DisableBackdropClick = true, FullWidth = true, CloseButton = true };
+        var dialog = DialogService.Show<Upsert>("افزودن ایتم جدید", options);
+    }
+}
