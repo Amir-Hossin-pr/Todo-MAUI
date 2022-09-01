@@ -1,4 +1,6 @@
-﻿
+﻿@using Todo_Maui_Blazor.Services
+
+@inject ITodoService TodoService
 
 <MudDialog>
     <DialogContent>
@@ -22,7 +24,11 @@
 
     void Submit()
     {
-       
+        TodoService.InseretAsync(new()
+            {
+                Title = Title,
+                Text = Text
+            });
     }
 
     void Cancel() => MudDialog.Cancel();
