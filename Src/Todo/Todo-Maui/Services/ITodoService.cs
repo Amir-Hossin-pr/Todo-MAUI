@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Todo_Maui_Blazor.Models;
+﻿using Todo_Maui.Models;
 
-namespace Todo_Maui_Blazor.Services;
+namespace Todo_Maui.Services;
 
 public interface ITodoService : IDisposable
 {

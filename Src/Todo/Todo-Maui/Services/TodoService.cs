@@ -1,12 +1,7 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Todo_Maui_Blazor.Models;
+using Todo_Maui.Models;
 
-namespace Todo_Maui_Blazor.Services;
+namespace Todo_Maui.Services;
 
 public class TodoService : ITodoService
 {
@@ -39,7 +34,7 @@ public class TodoService : ITodoService
             await _db.InsertAsync(todo);
             return true;
         }
-        catch 
+        catch
         {
             return false;
         }
@@ -49,7 +44,7 @@ public class TodoService : ITodoService
         => await _db.Table<Todo>().ToListAsync();
 
     public async Task<Todo> GetAsync(int id)
-        => await _db.Table<Todo>().FirstOrDefaultAsync(t=> t.Id == id);
+        => await _db.Table<Todo>().FirstOrDefaultAsync(t => t.Id == id);
 
     public async Task<bool> UpdateAsync(Todo todo)
     {
