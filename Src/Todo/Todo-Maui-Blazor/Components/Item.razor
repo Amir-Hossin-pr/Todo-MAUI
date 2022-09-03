@@ -1,13 +1,14 @@
 ﻿
-<MudItem>
-    <MudCard Outlined="true">
+<MudItem  xs="12">
+    <MudCard Outlined="true" Class="rounded-lg mud-elevation-1">
         <MudCardContent>
             <MudText>@Title</MudText>
             <MudText Typo="Typo.body2">@Text</MudText>
         </MudCardContent>
         <MudCardActions>
-            @*<MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>*@
-            <MudButton Variant="Variant.Filled" Color="Color.Error" IconClass="@Icons.Material.Filled.Delete">حذف</MudButton>
+            <MudButton Variant="Variant.Filled" Color="Color.Warning" StartIcon="@Icons.Material.Filled.Edit">ویرایش</MudButton>
+            <MudSpacer/>
+            <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete">حذف</MudButton>
         </MudCardActions>
     </MudCard>
 </MudItem>

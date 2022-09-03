@@ -21,8 +21,10 @@ public class TodoService : ITodoService
     {
         if (_db == null)
         {
-            var cnn = Path.Combine(FileSystem.Current.AppDataDirectory, "Todo.db");
+            var cnn = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Todo.db");
+          
             _db = new(cnn);
+            
             await _db.CreateTableAsync<Todo>();
         }
     }

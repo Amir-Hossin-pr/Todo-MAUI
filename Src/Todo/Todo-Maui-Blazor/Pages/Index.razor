@@ -11,10 +11,10 @@
     </MudText>
 </div>*@
 
-<MudFab Icon="@Icons.Filled.Add" Color="@Color.Primary" Style="top:15px;left:25px" @onclick="NewItem" />
+<MudFab Icon="@Icons.Filled.Add" Color="@Color.Primary" Style="position:fixed;bottom:25px;left:25px" @onclick="NewItem" />
 
 <br/>
-<MudGrid Spacing="2" Justify="@Justify.Center">
+<MudGrid  Justify="@Justify.Center">
     @foreach (var item in todos)
     {
         <Item Title="@item.Title" Text="@item.Text" Id="@item.Id" />
