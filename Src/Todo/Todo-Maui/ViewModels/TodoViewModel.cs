@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Maui.Controls;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Todo_Maui.Models;
@@ -13,11 +14,32 @@ public class TodoViewModel : INotifyPropertyChanged
 
     private ObservableCollection<Todo> _todos;
 
-    //private readonly ITodoService _todoService;
+    private string _title;
+
+    private string _text;
+
+    private Command _save;
+
+    public string Title
+    {
+        get => _title; set
+        {
+            _title = value;
+            OnPropertyChanged(nameof(Title));
+        }
+    }
+
+    public string Text
+    {
+        get => _text; set
+        {
+            _text = value;
+            OnPropertyChanged(nameof(Text));
+        }
+    }
 
     public TodoViewModel()
     {
-        //_todoService = GetService<ITodoService>();
         Fetch();
     }
 
@@ -55,30 +77,15 @@ public class TodoViewModel : INotifyPropertyChanged
                 Title= "test 2",
                 Text = "test for text"
             },
-              new()
-            {
-                Id = 2,
-                Title= "test 3",
-                Text = "test for text"
-            },
-               new()
-            {
-                Id = 3,
-                Title= "test 4",
-                Text = "test for text"
-            },
-                new()
-            {
-                Id = 4,
-                Title= "test 5",
-                Text = "test for text"
-            },
-                 new()
-            {
-                Id = 5,
-                Title= "test 6",
-                Text = "test for text"
-            }
         });
     }
+
+    public  Command Save
+    {
+        get => _save; set
+        {
+            _save = value;
+            OnPropertyChanged(nameof(Save));
+        }
+    } 
 }

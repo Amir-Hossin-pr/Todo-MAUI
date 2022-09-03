@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todo_Maui.Views.Upsert"
+             Title="Upsert"
+              xmlns:c="clr-namespace:Todo_Maui.ViewModels">
+
+    <Frame Padding="5" Margin="0"  BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}" x:DataType="c:TodoViewModel">
+        <Grid RowDefinitions="*,50,*">
+            <VerticalStackLayout Spacing="20">
+                <Entry Placeholder="Title" Keyboard="Text" FontSize="Title" VerticalOptions="Center" BindingContext="{Binding Title}"/>
+                <Border Padding="5">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="10"/>
+                    </Border.StrokeShape>
+                    <Editor AutoSize="TextChanges" HeightRequest="250" Placeholder="Text" FontSize="Body" Keyboard="Text" VerticalOptions="Center" BindingContext="{Binding Text}"/>
+                </Border>
+            </VerticalStackLayout>
+            <Button Grid.Row="1" BackgroundColor="{StaticResource Primary}" Margin="5,0" Text="Save" Command="{Binding Save}"/>
+        </Grid>
+    </Frame>
+</ContentPage>

@@ -1,4 +1,5 @@
 ﻿using Todo_Maui.ViewModels;
+using Todo_Maui.Views;
 
 namespace Todo_Maui
 {
@@ -8,6 +9,11 @@ namespace Todo_Maui
         {
             InitializeComponent();
             BindingContext = new TodoViewModel();
+        }
+
+        private async void NewItem(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Upsert(),true);
         }
     }
 }

@@ -15,12 +15,12 @@
                    BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
                    x:DataType="local:Todo">
                 <Grid RowDefinitions="42,40,*" Padding="20">
-                    <Label Grid.Row="0" Text="{Binding Title}" TextColor="Black" class="LargeTitle"/>
-                    <Label Grid.Row="1" Text="{Binding Text}" TextColor="Black" class="SubContent"/>
+                    <Label Grid.Row="0" Text="{Binding Title}" class="LargeTitle"/>
+                    <Label Grid.Row="1" Text="{Binding Text}" class="SubContent"/>
 
-                    <HorizontalStackLayout Grid.Row="3" Spacing="5" VerticalOptions="End">
-                        <Button Grid.Row="3" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource Secondary}" Text="Delete"/>
-                        <Button Grid.Row="3" BackgroundColor="{StaticResource Error}" TextColor="{StaticResource Secondary}" Text="Update"/>
+                    <HorizontalStackLayout Grid.Row="3" Spacing="15" VerticalOptions="End">
+                        <Button Grid.Row="3" BackgroundColor="{StaticResource Error}"  Text="Delete"/>
+                        <Button Grid.Row="3" BackgroundColor="{StaticResource Warning}"  Text="Update"/>
                     </HorizontalStackLayout>
                 </Grid>
             </Frame>
@@ -49,7 +49,6 @@
     <ScrollView>
         <VerticalStackLayout>
             <!--Search Box-->
-            <!-- Search Box -->
             <HorizontalStackLayout
                     VerticalOptions="Start"
                     Spacing="18"
@@ -62,11 +61,12 @@
                         WidthRequest="22"/>
                 <Entry
                     Placeholder="Search..."
-                        TextColor="#637989"
                         FontSize="18"
                         WidthRequest="240"
-                        VerticalOptions="Center"/>
+                        VerticalOptions="Center" ReturnType="Search"/>
             </HorizontalStackLayout>
+
+            <Button Clicked="NewItem" Text="Add New Item" BackgroundColor="{StaticResource Primary}" Margin="15"/>
 
             <!-- Actual Content -->
             <CollectionView ItemsSource="{Binding Todos}" ItemTemplate="{StaticResource Task}">
