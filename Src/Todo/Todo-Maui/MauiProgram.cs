@@ -1,4 +1,6 @@
-﻿namespace Todo_Maui
+﻿using Todo_Maui.Services;
+
+namespace Todo_Maui
 {
     public static class MauiProgram
     {
@@ -13,6 +15,7 @@
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.AddScoped<ITodoService, TodoService>();
             return builder.Build();
         }
     }
