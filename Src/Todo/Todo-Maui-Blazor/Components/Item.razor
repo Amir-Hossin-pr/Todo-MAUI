@@ -1,14 +1,16 @@
 ﻿
-<MudCard>
-    <MudCardContent>
-        <MudText>@Title</MudText>
-        <MudText Typo="Typo.body2">@Text</MudText>
-    </MudCardContent>
-    <MudCardActions>
-        @*<MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>*@
-        <MudButton Variant="Variant.Filled" Color="Color.Error" IconClass="@Icons.Material.Filled.Delete">حذف</MudButton>
-    </MudCardActions>
-</MudCard>
+<MudItem>
+    <MudCard Outlined="true">
+        <MudCardContent>
+            <MudText>@Title</MudText>
+            <MudText Typo="Typo.body2">@Text</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            @*<MudButton Variant="Variant.Text" Color="Color.Primary">Learn More</MudButton>*@
+            <MudButton Variant="Variant.Filled" Color="Color.Error" IconClass="@Icons.Material.Filled.Delete">حذف</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudItem>
 
 @code {
     [Parameter] public string Title { get; set; }

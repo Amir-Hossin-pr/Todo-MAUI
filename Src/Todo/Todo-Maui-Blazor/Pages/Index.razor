@@ -5,28 +5,44 @@
 @inject IDialogService DialogService
 @inject ITodoService TodoService
 
-<div Class="mud-theme-info px-3 py-6 mud-elevation-16 rounded-lg fixed text-center" style="bottom:25px;left:20px" @onclick="NewItem">
+@*<div Class="mud-theme-info px-3 py-6 mud-elevation-16 rounded-lg fixed text-center" style="bottom:25px;left:20px;z-index:1000" @onclick="NewItem">
     <MudText>
         افزودن مورد جدید
     </MudText>
-</div>
+</div>*@
 
-@foreach (var item in todos)
-{
-    <MudText>@item.Title</MudText>
-}
+<MudFab Icon="@Icons.Filled.Add" Color="@Color.Primary" Style="top:15px;left:25px" @onclick="NewItem" />
+
+<br/>
+<MudGrid Spacing="2" Justify="@Justify.Center">
+    @foreach (var item in todos)
+    {
+        <Item Title="@item.Title" Text="@item.Text" Id="@item.Id" />
+    }
+</MudGrid>
 
 @code {
 
-    void NewItem()
+    IEnumerable<Todo> todos = new List<Todo>();
+
+    async void NewItem()
     {
         DialogOptions options = new() { CloseOnEscapeKey = false, DisableBackdropClick = true, FullWidth = true, CloseButton = true };
         var dialog = DialogService.Show<Upsert>("افزودن ایتم جدید", options);
+        var result = await dialog.Result;
+        if (!result.Cancelled)
+        {
+            if (((dynamic)result.Data).Status)
+                todos.ToList().Add((Todo)((dynamic)result.Data).item);
+        }
     }
 
-    IEnumerable<Todo> todos;
-
     protected override async Task OnInitializedAsync()
+    {
+        await LoadItemsAsync();
+    }
+
+    async Task LoadItemsAsync()
     {
         todos = await TodoService.GetAllAsync();
     }

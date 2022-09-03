@@ -1,6 +1,8 @@
 ﻿@using Todo_Maui_Blazor.Services
+@using Todo_Maui_Blazor.Models
 
 @inject ITodoService TodoService
+@inject ISnackbar Snackbar
 
 <MudDialog>
     <DialogContent>
@@ -20,15 +22,48 @@
 
     [Parameter] public string Text { get; set; }
 
-    [Parameter] public int Id { get; set; }
+    [Parameter] public int? Id { get; set; }
 
-    void Submit()
+    async void Submit()
     {
-        TodoService.InseretAsync(new()
+        Todo item;
+        if (Id != null)
+        {
+            item = await TodoService.GetAsync(Id.Value);
+            item.Title = Title;
+            item.Text = Text;
+            if (await TodoService.UpdateAsync(item))
             {
-                Title = Title,
-                Text = Text
-            });
+                MudDialog.Close(DialogResult.Ok(new { Status = true, item }));
+                Snackbar.Add($"{Title} آپدیت شد");
+            }
+            else
+            {
+                MudDialog.Close(DialogResult.Ok(new { Status = false }));
+                Snackbar.Add("خطایی رخ داد", Severity.Error);
+            }
+
+        }
+        else
+        {
+            item = new()
+                {
+                    Title = Title,
+                    Text = Text
+                };
+
+            if (await TodoService.InseretAsync(item))
+            {
+                MudDialog.Close(DialogResult.Ok(new { Status = true, item }));
+                Snackbar.Add($"{Title} افزوده شد");
+            }
+            else
+            {
+                MudDialog.Close(DialogResult.Ok(new { Status = false }));
+                Snackbar.Add("خطایی رخ داد", Severity.Error);
+            }
+        }
+
     }
 
     void Cancel() => MudDialog.Cancel();
