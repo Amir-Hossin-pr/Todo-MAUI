@@ -16,6 +16,7 @@ public class TodoService : ITodoService
     {
         if (_db == null)
         {
+            //await Permissions.RequestAsync<Permissions.StorageWrite>();
             var cnn = Path.Combine(FileSystem.Current.AppDataDirectory, "Todo.db");
             _db = new(cnn);
             await _db.CreateTableAsync<Todo>();

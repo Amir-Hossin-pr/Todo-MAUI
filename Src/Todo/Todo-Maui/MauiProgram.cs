@@ -15,7 +15,7 @@ namespace Todo_Maui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddScoped<ITodoService, TodoService>();
+            //builder.Services.AddScoped<ITodoService, TodoService>();
             return builder.Build();
         }
     }

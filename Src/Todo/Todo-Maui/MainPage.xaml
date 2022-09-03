@@ -1,39 +1,100 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Todo_Maui.MainPage">
+             x:Class="Todo_Maui.MainPage"
+             xmlns:local="clr-namespace:Todo_Maui.Models" 
+             xmlns:c="clr-namespace:Todo_Maui.ViewModels"
+             xmlns:style="clr-namespace:Todo_Maui.Resources.Styles">
 
+    <ContentPage.Resources>
+        <DataTemplate x:Key="Task">
+            <Frame CornerRadius="20"
+                   HasShadow="True"
+                   Padding="0"
+                   Margin="5"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource LightGray}, Dark={StaticResource Background_Mid}}"
+                   x:DataType="local:Todo">
+                <Grid RowDefinitions="42,40,*" Padding="20">
+                    <Label Grid.Row="0" Text="{Binding Title}" TextColor="Black" class="LargeTitle"/>
+                    <Label Grid.Row="1" Text="{Binding Text}" TextColor="Black" class="SubContent"/>
+
+                    <HorizontalStackLayout Grid.Row="3" Spacing="5" VerticalOptions="End">
+                        <Button Grid.Row="3" BackgroundColor="{StaticResource Primary}" TextColor="{StaticResource Secondary}" Text="Delete"/>
+                        <Button Grid.Row="3" BackgroundColor="{StaticResource Error}" TextColor="{StaticResource Secondary}" Text="Update"/>
+                    </HorizontalStackLayout>
+                </Grid>
+            </Frame>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TaskBorder">
+            <Border Margin="{OnIdiom Phone=15,Default=25}" 
+                    Padding="0" 
+                    HorizontalOptions="Start"
+                    HeightRequest="154" WidthRequest="154"
+                    Stroke="Transparent" StrokeThickness="1"
+                    BackgroundColor="{StaticResource Background_Mid}"
+                    x:DataType="local:Todo">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="40"/>
+                </Border.StrokeShape>
+                <Grid RowDefinitions="42,40,*" Padding="20">
+                    <Label Text="{Binding Title}"  class="LargeTitle"/>
+                    <Label Text="{Binding Text}" class="SubContent"/>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ContentPage.Resources>
+
+    <!--Main Section-->
     <ScrollView>
-        <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+        <VerticalStackLayout>
+            <!--Search Box-->
+            <!-- Search Box -->
+            <HorizontalStackLayout
+                    VerticalOptions="Start"
+                    Spacing="18"
+                    Padding="{OnIdiom Phone='15,15,15,15', Default='25,25,25,0'}"
+                    >
+                <Image
+                        Source="search_icon.png"
+                        VerticalOptions="Center"
+                        HeightRequest="22"
+                        WidthRequest="22"/>
+                <Entry
+                    Placeholder="Search..."
+                        TextColor="#637989"
+                        FontSize="18"
+                        WidthRequest="240"
+                        VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
-
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+            <!-- Actual Content -->
+            <CollectionView ItemsSource="{Binding Todos}" ItemTemplate="{StaticResource Task}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="1"
+                                     VerticalItemSpacing="8"
+                                     HorizontalItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.FooterTemplate>
+                    <DataTemplate>
+                        <Border                           
+                            HorizontalOptions="Start"
+                            Margin="{OnIdiom Phone=15,Default=25}"
+                            Stroke="Transparent"
+                            StrokeThickness="1"
+                            BackgroundColor="{StaticResource Background_Mid}">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="60"/>
+                            </Border.StrokeShape>
+                            <ImageButton
+                                BackgroundColor="Transparent"
+                                Source="add_icon.png"
+                                VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.FooterTemplate>
+            </CollectionView>
 
         </VerticalStackLayout>
     </ScrollView>
